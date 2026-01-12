@@ -29,20 +29,20 @@ const TableHeader = styled.header`
   padding: 1.6rem 2.4rem;
 `;
 
-//gpt: 2 nomes pra data ou é destructuring do destructuring?
+/************************** COMPONENT **************************/
 function CabinTable() {
   const {
     isLoading,
     data: cabins,
     _error,
   } = useQuery({
-    queryKey: ["cabin"],
+    queryKey: ["cabins"],
     queryFn: getCabins,
   });
 
   if (isLoading) return <Spinner />;
 
-  ////////////////////////////////////////
+  /////////////
   return (
     <Table role="table">
       <TableHeader role="row">

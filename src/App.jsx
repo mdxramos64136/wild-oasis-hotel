@@ -17,9 +17,10 @@ import AppLayout from "./ui/AppLayout";
 // stale: seconds = miliseconds: the amount of the time the data will stay
 // cached/valid until refetched againd
 const queryClient = new QueryClient({
-  defaultOtions: {
+  defaultOptions: {
     queries: {
-      staleTime: 60 * 1000,
+      //staleTime: 60 * 1000,
+      staleTime: 0,
     },
   },
 });

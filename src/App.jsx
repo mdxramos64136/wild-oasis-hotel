@@ -12,6 +12,7 @@ import Account from "./pages/Account";
 import Users from "./pages/Users";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
+import { Toaster } from "react-hot-toast";
 
 // set up the cache and the query client
 // stale: seconds = miliseconds: the amount of the time the data will stay
@@ -47,6 +48,24 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margim: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+            backgroundColor: "var(--color-grey-0)",
+            color: "var(--color-grey-700)",
+          }}
+        />
       </QueryClientProvider>
     </>
   );

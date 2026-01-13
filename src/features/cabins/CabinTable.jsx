@@ -34,7 +34,8 @@ function CabinTable() {
   const {
     isLoading,
     data: cabins,
-    _error,
+    // eslint-disable-next-line no-unused-vars
+    error,
   } = useQuery({
     queryKey: ["cabins"],
     queryFn: getCabins,

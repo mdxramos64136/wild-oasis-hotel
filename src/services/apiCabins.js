@@ -24,3 +24,18 @@ export async function deleteCabin(id) {
   }
   return data;
 }
+
+// just pass the object. The fields that we have in the CreateCabinForm (in the ...resgister("name"))
+// is exactly the same that we have in the Supabase table.
+export async function createCabin(newCabin) {
+  const { data, error } = await supabase
+    .from("cabins")
+    .insert([newCabin])
+    .select();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Cabin could not be created");
+  }
+  return data;
+}

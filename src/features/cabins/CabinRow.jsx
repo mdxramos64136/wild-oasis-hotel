@@ -59,7 +59,6 @@ function CabinRow({ cabin }) {
 
   //mutate will be conected with the Delete button
   const { isLoading: isDeleting, mutate } = useMutation({
-    //alt sintaxe: multationFn: deleteCabin
     mutationFn: (id) => deleteCabin(id),
     onSuccess: () => {
       toast.success("Cabin Deleted.");

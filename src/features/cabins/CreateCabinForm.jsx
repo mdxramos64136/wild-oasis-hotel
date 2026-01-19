@@ -39,8 +39,8 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    console.log(data); //image is the exactly name of the columns in supabase
-    mutate({ ...data, image: data.image.at[0] });
+    //console.log(data); //image is the exactly name of the columns in supabase
+    mutate({ ...data, image: data.image[0] });
   }
 
   function onError(errors) {

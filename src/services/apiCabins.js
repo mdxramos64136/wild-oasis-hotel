@@ -28,15 +28,13 @@ export async function deleteCabin(id) {
 }
 
 /******************** CREATE CABIN ********************/
-// just pass the object. The fields that we have in the CreateCabinForm (in the ...resgister("name"))
-// is exactly the same that we have in the Supabase table.
 // we need to makesure that this name is unique
 // If cabin name contains '/' , then Supabase will create folders.
 // So, replaceAll() was used to replace All slashes with ''
 export async function createEditCabin(newCabin, id) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
   const imageName = hasImagePath
-    ? newCabin.Image
+    ? newCabin.image
     : `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
 
   //supabaseUrl comes from supabase.js
@@ -52,18 +50,15 @@ export async function createEditCabin(newCabin, id) {
 
   const { data, error } = await query.select().single();
 
-  //2. upload image
-  const { error: storageError } = supabase.storage;
+  //2. upload image.
+  const { error: storageError } = await supabase.storage
+    .from("cabin-images") //select the bucket
+    .upload(imageName, newCabin.image);
 
   if (error) {
     console.error(error);
     throw new Error("Cabin could not be created");
   }
-
-  if (id)
-    await supabase.storage
-      .from("cabin-images")
-      .upload(imageName, newCabin.image);
 
   // 3. delete the cabin if there was an error uploading the corresponding img
   if (storageError) {

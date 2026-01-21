@@ -24,5 +24,9 @@ dist-ssr
 *.sw?
 
 # My gitignore
+# Folders
 Notes/
+
+# Files
+CreateCabinForm-v1.jsx
 

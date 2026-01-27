@@ -59,7 +59,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         <Input
           type="number"
           id="maxCapacity"
-          disable={isWorking}
+          disabled={isWorking}
           {...register("maxCapacity", {
             required: "This field is required!",
             min: { value: 1, message: "Capacity should be at least 1" },
@@ -71,8 +71,9 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         <Input
           type="number"
           id="regularPrice"
-          disable={isWorking}
+          disabled={isWorking}
           {...register("regularPrice", {
+            valueAsNumber: true,
             required: "This field is required!",
             min: { value: 1, message: "Capacity should be at least 1" },
           })}
@@ -83,13 +84,14 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         <Input
           type="number"
           id="discount"
-          disable={isWorking}
+          disabled={isWorking}
           defaultValue={0}
           {...register("discount", {
+            valueAsNumber: true,
             required: "This field is required!",
             validate: (value) =>
               value <= getValues().regularPrice ||
-              "Discount should be less than the regular price",
+              `Discount ${value} should be less than the regular price ${getValues().regularPrice} `,
           })}
         />
       </FormRow>
@@ -98,7 +100,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         <Textarea
           type="number"
           id="description"
-          disable={isWorking}
+          disabled={isWorking}
           defaultValue=""
           {...register("description", {
             required: "This field is required!",
@@ -121,7 +123,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button disable={isWorking}>
+        <Button disabled={isWorking}>
           {isEditSession ? "Edit Cabin" : "Add New Cabin"}
         </Button>
       </FormRow>

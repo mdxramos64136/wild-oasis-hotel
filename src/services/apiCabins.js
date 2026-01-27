@@ -27,18 +27,21 @@ export async function deleteCabin(id) {
   return data;
 }
 
-/******************** CREATE CABIN ********************/
+/******************** EDIT AND CREATE CABIN ********************/
 // we need to makesure that this name is unique
 // If cabin name contains '/' , then Supabase will create folders.
 // So, replaceAll() was used to replace All slashes with ''
 export async function createEditCabin(newCabin, id) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
-  const imageName = hasImagePath
-    ? newCabin.image
-    : `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
+  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+    "/",
+    "",
+  );
 
   //supabaseUrl comes from supabase.js
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
+  const imagePath = hasImagePath
+    ? newCabin.image
+    : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
   let query = supabase.from("cabins");
 
@@ -50,7 +53,9 @@ export async function createEditCabin(newCabin, id) {
 
   const { data, error } = await query.select().single();
 
-  //2. upload image.
+  //2. upload image:
+  if (hasImagePath) return data;
+
   const { error: storageError } = await supabase.storage
     .from("cabin-images") //select the bucket
     .upload(imageName, newCabin.image);

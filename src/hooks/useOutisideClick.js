@@ -9,6 +9,7 @@ export function useOutsideClick(handleClose) {
           handleClose();
         }
       }
+
       document.addEventListener("click", handleClick, true);
 
       //remove event listener after component unmounts

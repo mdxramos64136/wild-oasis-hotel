@@ -28,7 +28,8 @@ dist-ssr
 Notes/
 
 # Files
-CreateCabinForm-v1.jsx
 AddCabin-v1.jsx
-Modal v-1.jsx
+CreateCabinForm-v1.jsx
+CabinRow-v1jsx
 CabinTable-v1.jsx
+Modal v-1.jsx
